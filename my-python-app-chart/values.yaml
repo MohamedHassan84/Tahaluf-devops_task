@@ -1,0 +1,38 @@
+# Default values for my-python-app-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+app:
+  image:
+    repository: registry.digitalocean.com/turbo-eg/flask-app:latest
+    tag: latest
+  service:
+    name: my-python-app-service
+    port: 5000
+  environment:
+    MONGO_URI: "mongodb"
+    MONGO_PORT: 27017
+    MONGO_USER: "root"
+    MONGO_PASS: "pass"
+
+mongodb:
+  image:
+    repository: mongo
+    tag: latest
+  service:
+    name: mongodb
+    port: 27017
+    database: users
+    username: root
+    password: pass
+# Update with your domain
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  path: /
+  hosts: my-python-app.turbo-eg.org
+    # - my-python-app.turbo-eg.org  
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /

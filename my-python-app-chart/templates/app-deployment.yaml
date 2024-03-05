@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-python-app-chart.fullname" . }}-app
+  labels:
+    app: {{ include "my-python-app-chart.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "my-python-app-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "my-python-app-chart.name" . }}
+    spec:
+      containers:
+        - name: my-python-app
+          image: "{{ .Values.app.image.repository }}"
+          ports:
+            - containerPort: {{ .Values.app.service.port }}
+          env:
+{{- range $key, $value := .Values.app.environment }}
+            - name: {{ $key | quote }}
+              value: {{ $value | quote }}
+{{- end }}

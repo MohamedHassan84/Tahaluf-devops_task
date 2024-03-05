@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "my-python-app-chart.fullname" . }}
+  annotations:
+    {{- toYaml .Values.ingress.annotations | nindent 4 | trim | default "" }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.hosts | quote }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.service.name }}
+                port:
+                  number: {{ .Values.app.service.port }}
+  ingressClassName: {{ .Values.ingress.ingressClassName | quote }}

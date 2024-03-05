@@ -1,0 +1,35 @@
+data/
+prometheus/
+app.py.old
+test-connection.yaml.bkp
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+*.env/
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+*.bak
+*.swp
+*.~*
+
+# Dependency folders
+node_modules/
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db

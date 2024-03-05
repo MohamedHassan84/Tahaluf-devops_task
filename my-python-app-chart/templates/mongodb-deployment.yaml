@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-python-app-chart.fullname" . }}-mongo
+  labels:
+    app: {{ include "my-python-app-chart.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "my-python-app-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "my-python-app-chart.name" . }}
+    spec:
+      containers:
+        - name: mongodb
+          image: "{{ .Values.mongodb.image.repository }}:{{ .Values.mongodb.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.mongodb.service.port }}
+          env:
+            - name: MONGO_INITDB_DATABASE
+              value: "{{ .Values.mongodb.service.database }}"
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "{{ .Values.mongodb.service.username }}"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "{{ .Values.mongodb.service.password }}"

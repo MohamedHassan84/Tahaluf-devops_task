@@ -1,0 +1,4 @@
+apiVersion: v2
+name: my-python-app-chart
+description: A Helm chart for deploying a Flask app and MongoDB
+version: 0.1.0

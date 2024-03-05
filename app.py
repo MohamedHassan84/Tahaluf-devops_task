@@ -4,9 +4,20 @@ from datetime import datetime
 import os
 app = Flask(__name__)
 
+# Retrieve environment variables
 mongo_uri = os.environ.get('MONGO_URI')
-# Connect to MongoDB
-client = MongoClient(mongo_uri)
+mongo_port = int(os.environ.get('MONGO_PORT'))  # Convert to int
+mongo_user = os.environ.get('MONGO_USER')
+mongo_pass = os.environ.get('MONGO_PASS')
+
+# MongoDB connection
+client = MongoClient(
+    host=mongo_uri,
+    port=mongo_port,
+    username=mongo_user,
+    password=mongo_pass,
+    authSource="admin"
+)
 db = client['users']  # Use 'users' database
 
 @app.route('/', methods=['GET', 'POST'])
@@ -20,5 +31,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    app.run(host='localhost',port=5000,debug=True) 

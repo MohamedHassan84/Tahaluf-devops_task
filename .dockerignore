@@ -1,0 +1,10 @@
+data/
+conf/
+my-python-app-chat/
+prometheus/
+app.py.old
+docker-compose.yml
+.gitignore
+Jenkinsfile
+NOTES.txt
+README.md
