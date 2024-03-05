@@ -6,7 +6,7 @@ replicaCount: 1
 
 app:
   image:
-    repository: registry.digitalocean.com/turbo-eg/flask-app
+    repository: registry-flask-app
     tag: latest
   service:
     name: my-python-app-service
@@ -32,7 +32,6 @@ ingress:
   enabled: true
   ingressClassName: "nginx"
   path: /
-  hosts: my-python-app.turbo-eg.org
-    # - my-python-app.turbo-eg.org  
+  hosts: your-host-domain
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
