@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: my-python-app
-          image: "{{ .Values.app.image.repository }}"
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
           ports:
             - containerPort: {{ .Values.app.service.port }}
           env:

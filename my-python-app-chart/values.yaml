@@ -6,7 +6,7 @@ replicaCount: 1
 
 app:
   image:
-    repository: registry.digitalocean.com/turbo-eg/flask-app:latest
+    repository: registry.digitalocean.com/turbo-eg/flask-app
     tag: latest
   service:
     name: my-python-app-service

@@ -2,7 +2,10 @@ from flask import Flask, request, render_template
 from pymongo import MongoClient
 from datetime import datetime
 import os
+from prometheus_flask_exporter import PrometheusMetrics
+
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 
 # Retrieve environment variables
 mongo_uri = os.environ.get('MONGO_URI')
@@ -31,4 +34,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='localhost',port=5000,debug=True) 
+    app.run(host='0.0.0.0',port=5000,debug=False) 
